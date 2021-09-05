@@ -30,6 +30,12 @@
     "api": {
       "tags": []
     },
+    "database": {
+      "tags": []
+    },
+    "dtos": {
+      "tags": []
+    },
     "webapp": {
       "tags": []
     },

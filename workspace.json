@@ -51,6 +51,48 @@
         }
       }
     },
+    "database": {
+      "root": "libs/database",
+      "sourceRoot": "libs/database/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/database/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/database"],
+          "options": {
+            "jestConfig": "libs/database/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "dtos": {
+      "root": "libs/dtos",
+      "sourceRoot": "libs/dtos/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/dtos/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/dtos"],
+          "options": {
+            "jestConfig": "libs/dtos/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "webapp": {
       "root": "apps/webapp",
       "sourceRoot": "apps/webapp/src",

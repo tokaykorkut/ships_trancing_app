@@ -11,10 +11,12 @@
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@oceanvoyapp/database": ["libs/database/src/index.ts"],
+      "@oceanvoyapp/dtos": ["libs/dtos/src/index.ts"]
+    },
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": ["node_modules", "tmp"]
 }

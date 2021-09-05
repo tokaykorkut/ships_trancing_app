@@ -1,11 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
     "module": "commonjs",
+    "outDir": "../../dist/out-tsc",
+    "declaration": true,
     "types": ["node"],
     "emitDecoratorMetadata": true,
-    "target": "es2015",
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true
   },
