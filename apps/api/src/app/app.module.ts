@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import * as Path from 'path';
 import * as Mongoose from 'mongoose';
+import { AisModule } from './modules/ais/ais.module';
 
 const envFilePath = Path.resolve(process.cwd(),'.env.local');
 console.log(envFilePath)
@@ -30,10 +29,8 @@ Mongoose.set("debug", true);
         useUnifiedTopology: true,
       }),
       inject:[ConfigService]
-    })
-
+    }),
+    AisModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
