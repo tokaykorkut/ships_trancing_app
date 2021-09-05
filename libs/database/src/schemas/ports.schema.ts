@@ -1,35 +1,44 @@
-import {Document, model, Model, Schema} from 'mongoose';
+import { Document} from 'mongoose';
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
+import * as mongoose from 'mongoose';
+@Schema()
+export class Port extends Document{
 
-interface IPorts extends Document{
-  Change?: string | unknown;
-  Coordinates?: string | unknown;
-  Country?: string;
-  Location?: string;
-  Name?: string;
-  NameWoDiacritics?: string;
-  Status?: string;
-  Function?: string;
-  Date?: string;
-  IATA?: string | unknown;
-  Remarks?: string | unknown;
-  Subdivision?: string | unknown;
+  @Prop({type: mongoose.Schema.Types.Mixed,required: false})
+  Change: unknown;
+
+  @Prop({type: mongoose.Schema.Types.Mixed,required: false})
+  Coordinates: unknown;
+
+  @Prop({required:false})
+  Country: string;
+
+  @Prop({required:false})
+  Location: string;
+
+  @Prop({required:false})
+  Name: string;
+
+  @Prop({required:false})
+  NameWoDiacritics: string;
+
+  @Prop({required:false})
+  Status: string;
+
+  @Prop({required:false})
+  Function: string;
+
+  @Prop({required:false})
+  Date: string;
+
+  @Prop({type: mongoose.Schema.Types.Mixed,required: false})
+  IATA: unknown;
+
+  @Prop({type: mongoose.Schema.Types.Mixed,required: false})
+  Remarks: unknown;
+
+  @Prop({type: mongoose.Schema.Types.Mixed,required: false})
+  Subdivision: unknown;
 }
 
-const PortSchema: Schema = new Schema({
-  Change: {type: String , required: false},
-  Coordinates: {type: String , required: false},
-  Country: {type: String , required: false},
-  Location: {type: String , required: false},
-  Name: {type: String , required: false},
-  NameWoDiacritics: {type: String , required: false},
-  Status: {type: String , required: false},
-  Function: {type: String , required: false},
-  Date: {type: String , required: false},
-  IATA: {type: String , required: false},
-  Remarks: {type: String , required: false},
-  Subdivision: {type: String , required: false},
-})
-
-const Port: Model<IPorts> = model('Port', PortSchema);
-
-export default Port;
+export const PortSchema = SchemaFactory.createForClass(Port);

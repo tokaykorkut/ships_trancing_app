@@ -1,51 +1,68 @@
-import {Document, model, Model, Schema} from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+import * as mongoose from 'mongoose';
+@Schema()
+export class Location extends Document{
 
-interface ILocations extends Document{
-  A?: number;
-  B?: number;
-  C?: number;
-  D?: number;
-  MMSI?: number;
-  TIME?: string;
-  LONGITUDE?: number;
-  LATITUDE?: number;
-  COG?: number;
-  SOG?: number;
-  HEADING?: number;
-  ROT?: number;
-  NAVSTAT?: number;
-  IMO?: number;
-  NAME?: string;
-  CALLSIGN?: string;
-  TYPE?: number;
-  DRAUGHT?: number;
-  DEST?: string;
-  ETA?: string | unknown;
+  @Prop({required:false})
+  A: number;
+
+  @Prop({required:false})
+  B: number;
+
+  @Prop({required:false})
+  C: number;
+
+  @Prop({required:false})
+  D: number;
+
+  @Prop({required:false})
+  MMSI: number;
+
+  @Prop({required:false})
+  TIME: string;
+
+  @Prop({required:false})
+  LONGITUDE: number;
+
+  @Prop({required:false})
+  LATITUDE: number;
+
+  @Prop({required:false})
+  COG: number;
+
+  @Prop({required:false})
+  SOG: number;
+
+  @Prop({required:false})
+  HEADING: number;
+
+  @Prop({required:false})
+  ROT: number;
+
+  @Prop({required:false})
+  NAVSTAT: number;
+
+  @Prop({required:false})
+  IMO: number;
+
+  @Prop({required:false})
+  NAME: string;
+
+  @Prop({required:false})
+  CALLSIGN: string;
+
+  @Prop({required:false})
+  TYPE: number;
+
+  @Prop({required:false})
+  DRAUGHT: number;
+
+  @Prop({required:false})
+  DEST: string;
+
+  @Prop({type: mongoose.Schema.Types.Mixed,required:false})
+  ETA: unknown;
 }
 
-const LocationSchema: Schema = new Schema({
-  A: {type: Number, required:false},
-  B: {type: Number, required:false},
-  C: {type: Number, required:false},
-  D: {type: Number, required:false},
-  MMSI: {type: Number, required:false},
-  TIME: {type: String, required:false},
-  LONGITUDE: {type: Number, required:false},
-  LATITUDE: {type: Number, required:false},
-  COG: {type: Number, required:false},
-  SOG: {type: Number, required:false},
-  HEADING: {type: Number, required:false},
-  ROT: {type: Number, required:false},
-  NAVSTAT: {type: Number, required:false},
-  IMO: {type: Number, required:false},
-  NAME: {type: String, required:false},
-  CALLSIGN: {type: String, required:false},
-  TYPE: {type: Number, required:false},
-  DRAUGHT: {type: Number, required:false},
-  DEST: {type: String, required:false},
-  ETA: {type: String, required:false},
-})
-
-const Location: Model<ILocations> = model('Location', LocationSchema);
-
-export default Location;
+export const LocationSchema = SchemaFactory.createForClass(Location);
