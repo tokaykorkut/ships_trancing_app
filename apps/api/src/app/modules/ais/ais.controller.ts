@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Get } from '@nestjs/common';
-import { PortDto, SearchVesselDto } from '@oceanvoyapp/dtos';
+import { MergedVesselListDto, PortDto, SearchVesselDto } from '@oceanvoyapp/dtos';
 import { AisService } from './ais.service';
 
 @Controller("ais")
@@ -14,7 +14,7 @@ export class AisController {
   @Post("findVessels")
   async getListOfAvailableVessels(
     @Body() searchVesselDto: SearchVesselDto,
-  ):Promise<unknown> {
+  ):Promise<MergedVesselListDto> {
     return await this.aisService.getListOfAvailableVessels(searchVesselDto);
   }
 

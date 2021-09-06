@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Port, Location} from '@oceanvoyapp/database';
-import { PortDto, SearchVesselDto} from '@oceanvoyapp/dtos';
+import { MergedVesselListDto, PortDto, SearchVesselDto} from '@oceanvoyapp/dtos';
 import { Model } from 'mongoose';
 import * as turf from '@turf/turf';
 @Injectable()
@@ -40,7 +40,7 @@ constructor(
   }
 
 
-  async getListOfAvailableVessels(searchVesselDto: SearchVesselDto): Promise<unknown> {
+  async getListOfAvailableVessels(searchVesselDto: SearchVesselDto): Promise<MergedVesselListDto> {
 
     const portLocation = await this.portModel.findOne({
       Name:searchVesselDto.port,
