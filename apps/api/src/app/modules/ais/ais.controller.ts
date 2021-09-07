@@ -1,4 +1,5 @@
-import { Body, Controller, Post, Get } from '@nestjs/common';
+import { Body, Controller, Post, Get, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { MergedVesselListDto, PortDto, SearchVesselDto } from '@oceanvoyapp/dtos';
 import { AisService } from './ais.service';
 
@@ -18,8 +19,9 @@ export class AisController {
     return await this.aisService.getListOfAvailableVessels(searchVesselDto);
   }
 
-  @Get("uploadFile")
-  async uploadAISData():Promise<unknown>{
-    return await this.aisService.uploadAISData();
+  @Post("uploadFile")
+  @UseInterceptors(FileInterceptor(''))
+  async uploadAISData(@UploadedFile() file): Promise<unknown>{
+    return await this.aisService.uploadAISData(file);
   }
 }
