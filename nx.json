@@ -30,6 +30,9 @@
     "api": {
       "tags": []
     },
+    "api-service": {
+      "tags": []
+    },
     "database": {
       "tags": []
     },

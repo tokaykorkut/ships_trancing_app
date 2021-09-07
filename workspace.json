@@ -51,6 +51,27 @@
         }
       }
     },
+    "api-service": {
+      "root": "libs/api-service",
+      "sourceRoot": "libs/api-service/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/api-service/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api-service"],
+          "options": {
+            "jestConfig": "libs/api-service/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "database": {
       "root": "libs/database",
       "sourceRoot": "libs/database/src",
