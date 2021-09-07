@@ -4,6 +4,7 @@ import { Port, Location} from '@oceanvoyapp/database';
 import { MergedVesselListDto, PortDto, SearchVesselDto} from '@oceanvoyapp/dtos';
 import { Model } from 'mongoose';
 import * as turf from '@turf/turf';
+import * as fs from 'fs';
 @Injectable()
 export class AisService {
 constructor(
@@ -12,7 +13,7 @@ constructor(
   ) {}
 
   async getPorts(): Promise<PortDto[]>{
-    const ports = await this.portModel.find({Function:{$regex:"1"}, Coordinates:{$exists:true}});
+    const ports = await this.portModel.find({Function:{$regex:"1"}, Coordinates:{$exists:true}}).limit(100);
     return ports;
   }
 
@@ -74,7 +75,7 @@ constructor(
         {DEST:{$regex:`${searchVesselDto.portCountry}===${searchVesselDto.port.toUpperCase()}`}},
         {DEST:{$regex:`${portNameShort}`}}
       ]
-    });
+    }).limit(100);
 
 
     // eslint-disable-next-line prefer-const
@@ -98,7 +99,7 @@ constructor(
         $or: [{DEST:null},{DEST:""}],
         // TODO: time format issue ask to Daniel
         // TIME:{$gte:searchVesselDto.beginDate,$lte:searchVesselDto.endDate},
-      });
+      }).limit(100);
 
       if(tempIdleOilVessels.length !== 0){
         tempIdleOilVessels.forEach((vessel)=>{
@@ -116,7 +117,7 @@ constructor(
     return {oilVesselsToDestination, idleOilVessels};
   }
 
-  async uploadAISData(): Promise<unknown>{
-    return "oilVessels";
+  async uploadAISData(file): Promise<unknown>{
+    return file;
   }
 }
