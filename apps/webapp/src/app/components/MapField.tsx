@@ -1,4 +1,4 @@
-import { useEffect , useRef, useState} from "react";
+import React , { useEffect , useRef, useState} from "react";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -13,7 +13,7 @@ const MapField = () => {
 
   const [lng, setLng] = useState(28.979530);
   const [lat, setLat] = useState(41.015137);
-  const [zoom, setZoom] = useState(9);
+  const [zoom, setZoom] = useState(5);
 
   useEffect(() => {
     const node = mapNode.current;
@@ -38,9 +38,9 @@ const MapField = () => {
     },[lat, lng, zoom]);
 
     return (
-    <div>
+    <React.Fragment>
       <div ref={mapNode} style={{ width: "100%", height: "100%" }}/>
-    </div>
+    </React.Fragment>
     );
 
 }
