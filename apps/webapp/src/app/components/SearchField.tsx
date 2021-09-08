@@ -111,7 +111,6 @@ const SearchField = ({ports=[]}: SearchFieldProps) => {
                   <Field component={Checkbox} label='idle' type="checkbox" name="idle"/>
                 </Grid>
               <br />
-              {JSON.stringify(errors)}
               <Grid item xs={12} md={6}>
                   <Button
                       size="large"
