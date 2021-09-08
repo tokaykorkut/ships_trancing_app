@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import {QueryClient, QueryClientProvider} from "react-query";
 import App from './app/app';
 import {ReactQueryDevtools} from "react-query/devtools";
-import {CssBaseline} from "@mui/material";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const queryClient = new QueryClient({
   defaultOptions: {

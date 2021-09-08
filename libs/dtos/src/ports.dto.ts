@@ -32,4 +32,6 @@ export class PortDto{
   Remarks?: unknown;
 
   Subdivision?: unknown;
+
+  id?: string | number  | undefined;
 }

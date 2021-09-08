@@ -1,9 +1,24 @@
-import { Box, Grid, Paper } from "@mui/material";
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import MapField from "./components/MapField";
 import SearchField from "./components/SearchField";
 import { useApiPorts } from "./hooks";
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap'
+    },
+  }),
+);
 
 export function App() {
+  const classes = useStyles();
+
   const {
     data: ports,
     error: portsError,
@@ -11,45 +26,13 @@ export function App() {
 } = useApiPorts();
 
   return (
-    <div>
+    <div className={classes.root}>
       <Grid container spacing={1}>
         <Grid item xs={12} md={6}>
-          <Box
-                sx={{
-                  mx: 'auto',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  '& > :not(style)': {
-                    m: 1,
-                    width: 800,
-                    height: 800,
-                  },
-                  textAlign: 'center',
-                }}
-              >
-            <Paper elevation={12}>
-              <MapField/>
-            </Paper>
-          </Box>
+            <MapField/>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Box
-              sx={{
-                mx: 'auto',
-                display: 'flex',
-                flexWrap: 'wrap',
-                '& > :not(style)': {
-                  m: 1,
-                  width: 800,
-                  height: 800,
-                },
-                textAlign: 'center',
-              }}
-            >
-            <Paper elevation={12}>
-              <SearchField ports={ports}/>
-            </Paper>
-          </Box>
+            <SearchField ports={ports}/>
         </Grid>
       </Grid>
     </div>
