@@ -14,6 +14,8 @@ import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import moment from "moment-timezone";
 import { SEARCH_LOCATIONS } from "../hooks";
+import UploadFileField from "./UploadFileField";
+
 interface SearchFieldProps {
   ports: PortDto[] | undefined;
 }
@@ -127,6 +129,7 @@ const SearchField = ({ports=[]}: SearchFieldProps) => {
           </Form>
         )}
       </Formik>
+      <UploadFileField/>
     </div>
   );
 }

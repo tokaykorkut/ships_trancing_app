@@ -127,7 +127,8 @@ constructor(
   }
 
 
-  async uploadAISData(file): Promise<unknown>{
-    return file;
+  async uploadAISData(file): Promise<boolean>{
+    console.log(file)
+    return true;
   }
 }

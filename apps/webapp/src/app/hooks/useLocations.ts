@@ -5,9 +5,9 @@ import { SEARCH_LOCATIONS } from "./query-keys";
 
 
 
-export function useApiVesselsOfSearch(options?: UseMutationOptions<unknown[], Error, SearchVesselDto>) {
-  return useMutation<unknown[], Error, SearchVesselDto>(async (payload) => {
-      return getQuery<unknown[]>(ApiConfig.GET_SEARCH_VESSELS({...payload}));
+export function useApiVesselsOfSearch(options?: UseMutationOptions<MergedVesselListDto, Error, SearchVesselDto>) {
+  return useMutation<MergedVesselListDto, Error, SearchVesselDto>(async (payload) => {
+      return getQuery<MergedVesselListDto>(ApiConfig.GET_SEARCH_VESSELS({...payload}));
   }, options)
 }
 

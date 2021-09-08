@@ -2,7 +2,6 @@ import React , { useEffect , useRef, useState} from "react";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { LocationDto } from "@oceanvoyapp/dtos";
-import {Point} from '@turf/turf';
 interface MapFieldProps {
   vessels: {
     oilVesselsToDestination: LocationDto[];
@@ -18,7 +17,6 @@ const MapField = ({vessels}: MapFieldProps) => {
   // as a required parameter `container` when initializing the mapbox-gl
   // will contain `null` by default
   const mapNode = useRef(null);
-console.log(vessels)
   const [lng, setLng] = useState(28.979530);
   const [lat, setLat] = useState(41.015137);
   const [zoom, setZoom] = useState(0);

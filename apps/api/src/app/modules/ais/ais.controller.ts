@@ -7,25 +7,28 @@ import { AisService } from './ais.service';
 export class AisController {
   constructor(private readonly aisService: AisService){}
 
-  @Get("ports")
+  @Get("list/ports")
   async getPorts():Promise<PortDto[]>{
     return await this.aisService.getPorts();
   }
 
-  @Post("findVessels")
+  @Post("search")
   async getListOfAvailableVessels(
     @Body() searchVesselDto: SearchVesselDto,
   ):Promise<MergedVesselListDto> {
     return await this.aisService.getListOfAvailableVessels(searchVesselDto);
   }
 
-  @Post("uploadFile")
-  @UseInterceptors(FileInterceptor(''))
-  async uploadAISData(@UploadedFile() file): Promise<unknown>{
+  @Post("upload")
+  @UseInterceptors(FileInterceptor('',{
+    dest:"./uploads"
+  }))
+  async uploadAISData(@UploadedFile() file): Promise<boolean>{
+    console.log(file)
     return await this.aisService.uploadAISData(file);
   }
 
-  @Get("vesselsList")
+  @Get("list/vessels")
   async getVessels():Promise<MergedVesselListDto>{
     return await this.aisService.getVessels();
   }
