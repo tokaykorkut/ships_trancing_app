@@ -83,6 +83,8 @@ export class LocationDto {
   DEST?: string;
 
   ETA?: unknown;
+
+  pointCoor?: unknown;
 }
 
 

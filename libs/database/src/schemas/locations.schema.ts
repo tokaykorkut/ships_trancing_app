@@ -63,6 +63,9 @@ export class Location extends Document{
 
   @Prop({type: mongoose.Schema.Types.Mixed,required:false})
   ETA: unknown;
+
+  @Prop({type: mongoose.Schema.Types.Mixed,required:false})
+  pointCoor: unknown;
 }
 
 export const LocationSchema = SchemaFactory.createForClass(Location);

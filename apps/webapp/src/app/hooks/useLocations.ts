@@ -1,6 +1,7 @@
 import { ApiConfig, getQuery } from "@oceanvoyapp/api-service";
-import { SearchVesselDto } from "@oceanvoyapp/dtos";
-import { useMutation, UseMutationOptions } from "react-query";
+import { MergedVesselListDto, SearchVesselDto } from "@oceanvoyapp/dtos";
+import { useMutation, UseMutationOptions, useQuery } from "react-query";
+import { SEARCH_LOCATIONS } from "./query-keys";
 
 
 
@@ -10,3 +11,7 @@ export function useApiVesselsOfSearch(options?: UseMutationOptions<unknown[], Er
   }, options)
 }
 
+export function useApiGetVesselsList() {
+  return useQuery<MergedVesselListDto, Error>(SEARCH_LOCATIONS, async () => {
+      return getQuery<MergedVesselListDto>(ApiConfig.GET_VESSELS_LIST());
+  })}

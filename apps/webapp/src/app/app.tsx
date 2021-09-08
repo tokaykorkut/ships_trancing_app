@@ -5,6 +5,7 @@ import SearchField from "./components/SearchField";
 import { useApiPorts } from "./hooks";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useApiGetVesselsList } from './hooks/useLocations';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,11 +26,17 @@ export function App() {
     isLoading: portsLoading,
 } = useApiPorts();
 
+  const {
+    data: vessels,
+    error: vesselsError,
+    isLoading: vesselsLoading,
+  } = useApiGetVesselsList();
+
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
         <Grid item xs={12} md={6}>
-            <MapField/>
+            <MapField vessels={vessels}/>
         </Grid>
         <Grid item xs={12} md={6}>
             <SearchField ports={ports}/>

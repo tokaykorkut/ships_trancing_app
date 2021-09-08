@@ -15,11 +15,16 @@ export default {
     method: HTTP.GET,
     url:'/ais/ports'
   }),
-  // VESSEL LCOATIONS
+  // LCOATIONS
   GET_SEARCH_VESSELS:(payload: SearchVesselDto): ConfigPayload => ({
     method: HTTP.POST,
     url:'/ais/findVessels',
     payload
-  })
+  }),
+  // VESSELS_LOCATIONS
+  GET_VESSELS_LIST:():ConfigPayload => ({
+    method: HTTP.GET,
+    url:'/ais/vesselsList'
+  }),
 }
 

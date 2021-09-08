@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Port, Location} from '@oceanvoyapp/database';
+import { Port, Location, TempLocation} from '@oceanvoyapp/database';
 import { MergedVesselListDto, PortDto, SearchVesselDto} from '@oceanvoyapp/dtos';
 import { Model } from 'mongoose';
 import * as turf from '@turf/turf';
@@ -10,6 +10,7 @@ export class AisService {
 constructor(
   @InjectModel('Port') private portModel: Model<Port>,
   @InjectModel('Location') private locationModel: Model<Location>,
+  @InjectModel('TempLocation') private tempLocationModel: Model<TempLocation>,
   ) {}
 
   async getPorts(): Promise<PortDto[]>{
@@ -86,6 +87,7 @@ constructor(
         const vesselPoint = turf.point([vessel.LONGITUDE, vessel.LATITUDE]);
         const diff = turf.rhumbDistance(vesselPoint,portPoint,{units:'kilometers'});
         if(diff<=searchVesselDto.distance){
+          vessel.pointCoor = turf.point([vessel.LONGITUDE, vessel.LATITUDE])
           oilVesselsToDestination.push(vessel);
         }
       })
@@ -106,16 +108,24 @@ constructor(
           const vesselPoint = turf.point([vessel.LONGITUDE, vessel.LATITUDE]);
           const diff = turf.rhumbDistance(vesselPoint,portPoint,{units:'kilometers'});
           if(diff<=searchVesselDto.distance){
-            console.log(`${diff}<${searchVesselDto.distance}`)
+            vessel.pointCoor = turf.point([vessel.LONGITUDE, vessel.LATITUDE])
             idleOilVessels.push(vessel);
           }
         })
       }
     }
 
+    await this.tempLocationModel.deleteMany();
+    const tempData = new this.tempLocationModel({oilVesselsToDestination, idleOilVessels});
+    await tempData.save();
 
     return {oilVesselsToDestination, idleOilVessels};
   }
+
+  async getVessels(): Promise<MergedVesselListDto>{
+    return await this.tempLocationModel.findOne() || {} as MergedVesselListDto;
+  }
+
 
   async uploadAISData(file): Promise<unknown>{
     return file;

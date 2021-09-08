@@ -24,4 +24,9 @@ export class AisController {
   async uploadAISData(@UploadedFile() file): Promise<unknown>{
     return await this.aisService.uploadAISData(file);
   }
+
+  @Get("vesselsList")
+  async getVessels():Promise<MergedVesselListDto>{
+    return await this.aisService.getVessels();
+  }
 }
