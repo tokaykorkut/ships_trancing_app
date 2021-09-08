@@ -1,5 +1,5 @@
 import { HTTP, HttpMethod } from "./constants";
-
+import {SearchVesselDto} from '@oceanvoyapp/dtos';
 export interface ConfigPayload {
   url: string;
   method: HttpMethod;
@@ -16,10 +16,10 @@ export default {
     url:'/ais/ports'
   }),
   // VESSEL LCOATIONS
-  GET_SEARCH_VESSELS:(): ConfigPayload => ({
+  GET_SEARCH_VESSELS:(payload: SearchVesselDto): ConfigPayload => ({
     method: HTTP.POST,
     url:'/ais/findVessels',
-    // TODO: fix this paylaod !!!
-    payload: {}
+    payload
   })
 }
+

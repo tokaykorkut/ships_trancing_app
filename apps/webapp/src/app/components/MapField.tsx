@@ -38,9 +38,9 @@ const MapField = () => {
     },[lat, lng, zoom]);
 
     return (
-    <>
+    <div>
       <div ref={mapNode} style={{ width: "100%", height: "100%" }}/>
-    </>
+    </div>
     );
 
 }

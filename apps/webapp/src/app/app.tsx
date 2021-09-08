@@ -47,7 +47,7 @@ export function App() {
               }}
             >
             <Paper elevation={12}>
-              <SearchField/>
+              <SearchField ports={ports}/>
             </Paper>
           </Box>
         </Grid>
