@@ -17,7 +17,7 @@ Mongoose.set("debug", true);
       isGlobal:true,
       validationSchema: Joi.object({
         MONGO_URI: Joi.string().required(),
-        REACT_APP_MAPBOX_GL_ACCESS_TOKEN: Joi.string().required(),
+        NX_REACT_APP_MAPBOX_GL_ACCESS_TOKEN: Joi.string().required(),
         SERVER_PORT: Joi.number().default(4000)
       }),
       envFilePath,

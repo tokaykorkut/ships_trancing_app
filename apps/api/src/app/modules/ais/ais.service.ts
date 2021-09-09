@@ -5,6 +5,9 @@ import { MergedVesselListDto, PortDto, SearchVesselDto} from '@oceanvoyapp/dtos'
 import { Model } from 'mongoose';
 import * as turf from '@turf/turf';
 import * as fs from 'fs';
+import { Express } from 'express';
+import 'multer';
+
 @Injectable()
 export class AisService {
 constructor(
@@ -127,8 +130,23 @@ constructor(
   }
 
 
-  async uploadAISData(file): Promise<boolean>{
-    console.log(file)
-    return true;
-  }
+  async uploadAISData(file: Express.Multer.File, body): Promise<boolean>{
+    const objRead = JSON.parse(fs.readFileSync(file.path.toString(), {encoding: 'utf-8'}));
+      try {
+        objRead.forEach(async(item) => {
+          await this.locationModel.findOneAndUpdate({
+            ...item
+          },
+          {
+            upsert:true
+          })
+        });
+        fs.unlinkSync(file.path);
+        return true
+      } catch (error) {
+        throw new Error(`Content is not uploaded into DB because of ${error}`)
+      }
+      return false;
+    }
+
 }

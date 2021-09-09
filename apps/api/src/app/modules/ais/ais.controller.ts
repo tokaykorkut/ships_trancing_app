@@ -2,7 +2,8 @@ import { Body, Controller, Post, Get, UseInterceptors, UploadedFile } from '@nes
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MergedVesselListDto, PortDto, SearchVesselDto } from '@oceanvoyapp/dtos';
 import { AisService } from './ais.service';
-
+import { Express } from 'express';
+import 'multer';
 @Controller("ais")
 export class AisController {
   constructor(private readonly aisService: AisService){}
@@ -23,9 +24,8 @@ export class AisController {
   @UseInterceptors(FileInterceptor('',{
     dest:"./uploads"
   }))
-  async uploadAISData(@UploadedFile() file): Promise<boolean>{
-    console.log(file)
-    return await this.aisService.uploadAISData(file);
+  async uploadAISData(@UploadedFile() file: Express.Multer.File, @Body() body): Promise<boolean>{
+    return await this.aisService.uploadAISData(file, body);
   }
 
   @Get("list/vessels")
