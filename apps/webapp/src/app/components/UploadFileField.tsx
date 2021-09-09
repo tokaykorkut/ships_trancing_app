@@ -23,13 +23,17 @@ const UploadFileField = () => {
       initialValues={initialValues}
       validationSchema={UploadSchema}
       onSubmit={async()=>{
+        console.log(file)
         if(file){
-          await axios.post('localhost:4000/ais/upload', file, {
+          await axios.post('https://localhost:4000/ais/upload', file,{
             headers: {
+              'Accept': 'multipart/form-data',
               'Content-Type': 'application/json'
             }
           }).then(res=>{
             console.log(res)
+          }).catch(err=>{
+            console.log(err)
           })
         }
       }}
@@ -39,7 +43,7 @@ const UploadFileField = () => {
               <Typography variant="h6">You can upload current data of AIS</Typography>
               <br/>
               <input id="file" name="file" type="file" onChange={(event) => {
-                setFile(event.currentTarget.files?.[0]);
+                setFile(event.target.files?.[0]);
               }} />
               <Button
                 variant="contained"
