@@ -25,6 +25,8 @@ export class AisController {
     dest:"./uploads"
   }))
   async uploadAISData(@UploadedFile() file: Express.Multer.File, @Body() body): Promise<boolean>{
+    console.log(file)
+    console.log(body)
     return await this.aisService.uploadAISData(file, body);
   }
 

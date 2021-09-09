@@ -10,10 +10,12 @@ const UploadSchema = Yup.object().shape({
 })
 
 
+
 const UploadFileField = () => {
-  const [file, setFile] = useState<unknown>();
+  const [file, setFile] = useState<File>();
+
   const initialValues = {
-    file:null
+    file: null
   }
   return (
     <div>
@@ -22,13 +24,17 @@ const UploadFileField = () => {
       <Formik
       initialValues={initialValues}
       validationSchema={UploadSchema}
-      onSubmit={async()=>{
-        console.log(file)
-        if(file){
-          await axios.post('https://localhost:4000/ais/upload', file,{
+      onSubmit={async(value)=>{
+        const formData = new FormData();
+        if(value.file!==null){
+          formData.append(
+            'file',
+            value.file || {} as Blob,
+          )
+          console.log(formData)
+          await axios.post('http://localhost:4000/ais/upload', formData,{
             headers: {
-              'Accept': 'multipart/form-data',
-              'Content-Type': 'application/json'
+              'Content-Type': 'multipart/form-data'
             }
           }).then(res=>{
             console.log(res)
@@ -36,14 +42,15 @@ const UploadFileField = () => {
             console.log(err)
           })
         }
-      }}
+      }
+      }
       >
-        {()=>(
+        {(values)=>(
             <Form>
               <Typography variant="h6">You can upload current data of AIS</Typography>
               <br/>
               <input id="file" name="file" type="file" onChange={(event) => {
-                setFile(event.target.files?.[0]);
+                values.setFieldValue('file',event.currentTarget.files?.[0]);
               }} />
               <Button
                 variant="contained"
