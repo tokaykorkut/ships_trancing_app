@@ -21,13 +21,11 @@ export class AisController {
   }
 
   @Post("upload")
-  @UseInterceptors(FileInterceptor('',{
+  @UseInterceptors(FileInterceptor('file',{
     dest:"./uploads"
   }))
-  async uploadAISData(@UploadedFile() file: Express.Multer.File, @Body() body): Promise<boolean>{
-    console.log(file)
-    console.log(body)
-    return await this.aisService.uploadAISData(file, body);
+  async uploadAISData(@UploadedFile() file: Express.Multer.File): Promise<string>{
+    return await this.aisService.uploadAISData(file);
   }
 
   @Get("list/vessels")

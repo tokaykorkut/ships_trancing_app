@@ -130,23 +130,22 @@ constructor(
   }
 
 
-  async uploadAISData(file: Express.Multer.File, body): Promise<boolean>{
-    const objRead = JSON.parse(fs.readFileSync(file.path.toString(), {encoding: 'utf-8'}));
-      try {
-        objRead.forEach(async(item) => {
-          await this.locationModel.findOneAndUpdate({
-            ...item
-          },
-          {
-            upsert:true
-          })
-        });
-        fs.unlinkSync(file.path);
-        return true
-      } catch (error) {
-        throw new Error(`Content is not uploaded into DB because of ${error}`)
-      }
-      return false;
+  async uploadAISData(file: Express.Multer.File): Promise<string>{
+    if(file.mimetype==='application/octet-stream'){
+      const objRead = JSON.parse(fs.readFileSync(file.path.toString(), {encoding: 'utf-8'}));
+      objRead.forEach(async(item) => {
+        await this.locationModel.findOneAndUpdate({
+          ...item
+        },
+        {
+          upsert:true
+        })
+      });
+      fs.unlinkSync(file.path);
+      return 'SUCCESSFULLY UPDATED!';
+    }
+    fs.unlinkSync(file.path);
+    return 'FAILED!';
     }
 
 }
