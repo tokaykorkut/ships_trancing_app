@@ -28,7 +28,7 @@ const MapField = ({vessels}: MapFieldProps) => {
 
       const mapBoxMap = new mapboxgl.Map({
       container: node,
-      accessToken:'pk.eyJ1IjoidHRiZXJhdCIsImEiOiJja3QybXdkbG4wbGoyMm9tbGc4bGs3bTBvIn0.R0dnBMLXTYGE-pxFUHe6iw',
+      accessToken: process.env.NX_REACT_APP_MAPBOX_GL_ACCESS_TOKEN,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
       zoom: zoom

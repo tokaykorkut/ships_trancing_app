@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "start:webapp": "nx serve webapp",
+    "start:webapp": "NODE_ENV=development NX_REACT_APP_MAPBOX_GL_ACCESS_TOKEN==pk.eyJ1IjoidHRiZXJhdCIsImEiOiJja3QybXdkbG4wbGoyMm9tbGc4bGs3bTBvIn0.R0dnBMLXTYGE-pxFUHe6iw env-cmd -f .env.local nx serve webapp",
     "start:api": "nx serve api"
   },
   "private": true,
@@ -31,6 +31,7 @@
     "class-validator": "^0.13.1",
     "core-js": "^3.6.5",
     "date-fns": "^2.23.0",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.9",
     "formik-material-ui": "^4.0.0-alpha.1",
     "formik-material-ui-lab": "^1.0.0-alpha.1",
