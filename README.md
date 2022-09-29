@@ -1,6 +1,4 @@
-
-
-# Oceanvoyapp
+# Ship Tracing on Map
 
 This project was generated using [Nx](https://nx.dev).
 
